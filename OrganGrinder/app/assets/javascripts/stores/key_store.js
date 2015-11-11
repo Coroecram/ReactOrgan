@@ -1,5 +1,4 @@
 (function () {
-  // noteName: pressed?
   var _keys = {};
 
   var KeyStore = window.KeyStore = $.extend({}, EventEmitter.prototype, {
@@ -20,7 +19,16 @@
       return !!_keys[key];
     },
 
-    
+    pressedKeys: function() {
+      return Object.keys(_keys);
+    },
+
+    updateKeys: function(keys) {
+      _keys = keys.reduce(function(accum, key){
+        accum[key] = true;
+        return accum;
+      }, {});
+    }
 
   });
 
@@ -31,6 +39,17 @@
         _keys[action.key] = true;
         KeyStore.emitChange();
         break;
+
+      case KeyActionTypes.KEY_UNPRESSED:
+        delete _keys[action.key];
+        KeyStore.emitChange();
+        break;
+
+      case KeyActionTypes.ALL_KEY_CHANGE:
+        KeyStore.updateKeys(action.keys);
+        KeyStore.emitChange();
+        break;
+
       default:
 
     }
