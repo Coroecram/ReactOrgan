@@ -1,10 +1,14 @@
 var TrackPlayer = React.createClass({
+  componentDidMount: function() {
+    this.track = new Track(this.props.track);
+  },
+
   playTrack: function() {
-    this.props.track.play();
+    this.track.play();
   },
 
   deleteTrack: function() {
-    // TODO
+    TrackActions.deleteTrack(this.props.track.id);
   },
 
   render: function() {

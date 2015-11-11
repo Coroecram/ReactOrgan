@@ -5,7 +5,9 @@ window.KeyActionTypes = {
 };
 
 window.TrackActionTypes = {
-  CREATE_TRACK: 'CREATE_TRACK'
+  CREATE_TRACK: 'CREATE_TRACK',
+  DELETE_TRACK: 'DELETE_TRACK',
+  FETCH_TRACKS: 'FETCH_TRACKS'
 };
 
 window.CHANGE_EVENT = 'change';

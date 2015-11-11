@@ -15,12 +15,27 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
-    createTrack: function(track) {
-      console.log("creating:", track);
+    create: function(track) {
+      TrackApiUtils.create(track).then(function(data){
+        _tracks.push(data);
+        TrackStore.emitChange();
+      });
+    },
+
+    delete: function(id) {
+      TrackApiUtils.delete(id).then(function() {
+        _tracks = _tracks.filter(function(track) {
+          return track.id !== id;
+        });
+        TrackStore.emitChange();
+      });
     },
 
     fetch: function(){
-      return;
+      TrackApiUtils.fetch().then(function(data) {
+        _tracks = data;
+        TrackStore.emitChange();
+      });
     },
 
     all: function() {
@@ -34,8 +49,16 @@
 
       case TrackActionTypes.CREATE_TRACK:
         TrackStore.create(action.track);
-        TrackStore.emitChange();
         break;
+
+      case TrackActionTypes.DELETE_TRACK:
+        TrackStore.delete(action.id);
+        break;
+
+      case TrackActionTypes.FETCH_TRACKS:
+        TrackStore.fetch();
+        break;
+
       default:
 
     }

@@ -4,12 +4,12 @@ var Jukebox = React.createClass({
   },
 
   componentDidMount: function() {
-    TrackStore.addChangeListener(this.updateTracks.bind(this));
+    TrackStore.addChangeListener(this.updateTracks);
     TrackStore.fetch();
   },
 
   componentWillUnmount: function() {
-    TrackStore.removeChangeListener(this.updateTracks.bind(this));
+    TrackStore.removeChangeListener(this.updateTracks);
   },
 
   updateTracks: function() {
@@ -18,13 +18,13 @@ var Jukebox = React.createClass({
 
   render: function() {
     return (
-      <ul className="jukebox">
+      <ol className="jukebox">
         {
           this.state.tracks.map(function(track, idx){
             return <li key={idx}><TrackPlayer track={track} /></li>;
           })
         }
-      </ul>
+      </ol>
     );
   }
 });

@@ -8,14 +8,14 @@ Track.prototype.startRecording = function() {
   this.startTime = Date.now();
 };
 
-Track.prototype.stopRecording = function() {
-  this.addNotes([]);
-};
 
 Track.prototype.addNotes = function(notes) {
   var timeSlice = Date.now() - this.startTime;
-
   this.roll.push({timeSlice: timeSlice, notes: notes});
+};
+
+Track.prototype.stop = function() {
+  KeyActions.allKeyChange([]);
 };
 
 Track.prototype.play = function() {
@@ -23,16 +23,18 @@ Track.prototype.play = function() {
     return;
   }
 
+
   var playbackStartTime = Date.now();
   var nextNoteIdx = 0;
 
   var playNote = function() {
-    if (nextNoteIdx >= this.roll.length){
+    var nextNote = this.roll[nextNoteIdx];
+    if (nextNote !== nextNote || typeof nextNote === "undefined") {
       return false;
     }
 
     var elapsedTime = Date.now() - playbackStartTime;
-    if (this.roll[nextNoteIdx].timeSlice < elapsedTime) {
+    if (nextNote.timeSlice < elapsedTime) {
       KeyActions.allKeyChange(this.roll[nextNoteIdx++].notes);
     }
     return true;
@@ -42,6 +44,7 @@ Track.prototype.play = function() {
     if (!playNote()) {
       clearInterval(this.interval);
       this.interval = undefined;
+      this.stop();
     }
   }.bind(this), 100);
 };

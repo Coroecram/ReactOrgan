@@ -13,3 +13,51 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body, h1, h2, h3, h4, ul, li {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+
+   background: transparent;
+
+   font: inherit;
+   color: inherit;
+   text-align: inherit;
+ }
+
+ ul {
+   list-style: none;
+ }
+
+ .group:after {
+   content: "";
+   display: block;
+   clear: both;
+ }
+
+ .organ {
+   width: 500px;
+   height: 200px;
+   background-color: red;
+   margin: auto;
+ }
+
+ .organ li {
+   background-color: white;
+   float: left;
+   width: 48px;
+   height: 80%;
+   margin-top: 20%;
+   border: 1px solid black;
+ }
+
+.key {
+  width: 100%;
+  height: 100%;
+}
+
+ .pressed {
+   background: #a4a4a4;
+ }

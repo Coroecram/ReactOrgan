@@ -24,6 +24,7 @@
     },
 
     updateKeys: function(keys) {
+      if (typeof keys === 'undefined') return;
       _keys = keys.reduce(function(accum, key){
         accum[key] = true;
         return accum;

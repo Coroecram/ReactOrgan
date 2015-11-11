@@ -6,19 +6,15 @@ var Key = React.createClass({
 
   componentDidMount: function() {
     this.note = new Note(Tones[this.props.noteName]);
-    KeyStore.addChangeListener(this.updateNoise.bind(this));
+    KeyStore.addChangeListener(this.updateNoise);
   },
 
   componentWillUnmount: function() {
-    KeyStore.removeChangeListener(this.updateNoise.bind(this));
+    KeyStore.removeChangeListener(this.updateNoise);
   },
 
   updateNoise: function() {
-    if (KeyStore.isKeyPressed(this.props.noteName)){
-      this.note.start();
-    } else {
-      this.note.stop();
-    }
+  KeyStore.isKeyPressed(this.props.noteName) ? this.note.start() : this.note.stop()
     this.updatePressed();
   },
 

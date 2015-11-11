@@ -4,25 +4,43 @@ var Recorder = React.createClass({
   },
 
   componentDidMount: function() {
-    // KeyStore.addChangeListener(function() {
-    //   this.state.track.addNotes(KeyStore.pressedKeys());
-    // });
+    KeyStore.addChangeListener(this.recordNotes);
+  },
+
+  componentWillUnmount: function() {
+    KeyStore.removeChangeListener(this.recordNotes);
+  },
+
+  recordNotes: function() {
+    if (this.state.isRecording) {
+      this.state.track.addNotes(KeyStore.pressedKeys());
+    }
   },
 
   playTrack: function() {
     if (this.state.isRecording){
       return;
     }
+
     this.state.track.play();
   },
 
   recordTrack: function() {
-    if (this.state.isRecording){
-      return;
-    }
     this.setState({isRecording: true});
+    this.state.track.startRecording();
+  },
 
-    // record track here
+  stopRecord: function() {
+    this.setState({ isRecording: false });
+  },
+
+  saveTrack: function() {
+    if (this.state.isRecording) {
+      this.stopRecord();
+    }
+
+    console.log("Saving", this.state.track);
+    TrackActions.createTrack(this.state.track);
   },
 
   render: function() {
@@ -32,8 +50,8 @@ var Recorder = React.createClass({
       <div className="recorder">
         <button onClick={this.playTrack}>Play</button>
         <button onClick={this.recordTrack}>Record</button>
-        <button onClick={}>Stop</button>
-        <button onClick={}>Save</button>
+        <button onClick={this.stopRecord}>Stop</button>
+        <button onClick={this.saveTrack}>Save</button>
       </div>
     );
   }
