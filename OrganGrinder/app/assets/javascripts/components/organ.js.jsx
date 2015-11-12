@@ -4,7 +4,7 @@ var Organ = React.createClass({
     return (
       <ul className="organ group">
         {
-          Object.keys(window.Tones).map(function(key, idx){
+          Object.keys(TONES).map(function(key, idx){
             return (<li key={idx}><Key noteName={key} /></li>);
           })
         }

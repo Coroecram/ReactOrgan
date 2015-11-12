@@ -36,22 +36,22 @@
   KeyStore.dispatchToken = AppDispatcher.register(function(action) {
     switch(action.type) {
 
-      case KeyActionTypes.KEY_PRESSED:
-        _keys[action.key] = true;
-        KeyStore.emitChange();
-        break;
+    case KeyActionTypes.KEY_PRESSED:
+      _keys[action.key] = true;
+      KeyStore.emitChange();
+      break;
 
-      case KeyActionTypes.KEY_UNPRESSED:
-        delete _keys[action.key];
-        KeyStore.emitChange();
-        break;
+    case KeyActionTypes.KEY_UNPRESSED:
+      delete _keys[action.key];
+      KeyStore.emitChange();
+      break;
 
-      case KeyActionTypes.ALL_KEY_CHANGE:
-        KeyStore.updateKeys(action.keys);
-        KeyStore.emitChange();
-        break;
+    case KeyActionTypes.ALL_KEY_CHANGE:
+      KeyStore.updateKeys(action.keys);
+      KeyStore.emitChange();
+      break;
 
-      default:
+    default:
 
     }
   });

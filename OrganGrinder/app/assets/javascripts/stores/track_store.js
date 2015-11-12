@@ -47,19 +47,19 @@
   TrackStore.dispatchToken = AppDispatcher.register(function(action) {
     switch(action.type) {
 
-      case TrackActionTypes.CREATE_TRACK:
-        TrackStore.create(action.track);
-        break;
+    case TrackActionTypes.CREATE_TRACK:
+      TrackStore.create(action.track);
+      break;
 
-      case TrackActionTypes.DELETE_TRACK:
-        TrackStore.delete(action.id);
-        break;
+    case TrackActionTypes.DELETE_TRACK:
+      TrackStore.delete(action.id);
+      break;
 
-      case TrackActionTypes.FETCH_TRACKS:
-        TrackStore.fetch();
-        break;
+    case TrackActionTypes.FETCH_TRACKS:
+      TrackStore.fetch();
+      break;
 
-      default:
+    default:
 
     }
   });

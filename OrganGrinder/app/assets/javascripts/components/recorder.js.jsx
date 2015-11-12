@@ -39,7 +39,6 @@ var Recorder = React.createClass({
       this.stopRecord();
     }
 
-    console.log("Saving", this.state.track);
     TrackActions.createTrack(this.state.track);
   },
 

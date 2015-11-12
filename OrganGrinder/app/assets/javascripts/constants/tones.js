@@ -154,7 +154,7 @@ var allTones = {
   "B8":7902.13
 };
 
-window.Tones = {};
+window.TONES = {};
 
 ["F3",
  "G3",
